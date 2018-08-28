@@ -1,9 +1,11 @@
+import PathNotation from 'path-notation';
 import KeyNodeError from './KeyNodeError';
 
-export const ROOT_KEYS:unique symbol = Symbol('Root Keys Lib');
-const CHILDREN:unique symbol = Symbol('Child Keys Lib');
-const DEPTH:unique symbol = Symbol('Depth Cache');
-const PARENTS:unique symbol = Symbol('Parents Cache');
+export const ROOT_KEYS:unique symbol = Symbol('ROOT_KEYS');
+const CHILDREN:unique symbol = Symbol('CHILDREN');
+const DEPTH:unique symbol = Symbol('DEPTH');
+const PARENTS:unique symbol = Symbol('PARENTS');
+const PATH_NOTATION:unique symbol = Symbol('PATH_NOTATION');
 
 export abstract class BaseKeyNode<Tself extends BaseKeyNode = any> extends String {
 
@@ -14,6 +16,7 @@ export abstract class BaseKeyNode<Tself extends BaseKeyNode = any> extends Strin
   private readonly [CHILDREN] = new Map<string,Tself>();
   private [DEPTH]:number;
   private [PARENTS]:Set<Tself>;
+  private [PATH_NOTATION]:PathNotation;
 
   constructor(key:string, parent:Tself | Map<string, Tself>){
 
@@ -79,6 +82,31 @@ export abstract class BaseKeyNode<Tself extends BaseKeyNode = any> extends Strin
     }
 
     return this[DEPTH];
+
+  }
+
+  get pathNotation():PathNotation{
+
+    if(this[PATH_NOTATION] === undefined){
+
+      const pkeys:BaseKeyNode<Tself>[] = [this];
+
+      let pKey = this.PARENT;
+
+      while(pKey !== null){
+
+        pkeys.unshift(pKey);
+
+        pKey = pKey.PARENT;
+
+      }
+
+
+      this[PATH_NOTATION] = new PathNotation(pkeys);
+
+    }
+
+    return this[PATH_NOTATION];
 
   }
 

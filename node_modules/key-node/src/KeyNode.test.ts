@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import PathNotation from 'path-notation';
 import {KeyNode} from './KeyNode';
 import KeyNodeError from './KeyNodeError';
 
@@ -103,6 +104,48 @@ describe(`KeyNode`,()=>{
         expect(fooBazKey).property('depth').to.equal(1);
         expect(fooBarKey).property('depth').to.equal(1);
         expect(fooBarQuxKey).property('depth').to.equal(2);
+
+      });
+
+    });
+
+    describe(`pathNotation`,()=>{
+
+      const rootDoc = {
+
+        foo:{
+
+          bar:{
+
+            baz:Symbol()
+
+          }
+
+        }
+
+      };
+
+      const fooKey = new KeyNode('foo', new Map());
+      const fooBarKey = new KeyNode('bar',fooKey);
+      const fooBarBazKey = new KeyNode('baz',fooBarKey);
+
+      const expectedPath = 'foo.bar.baz';
+
+      const pathNotation = fooBarBazKey.pathNotation;
+
+      it(`Returns PathNotation instance of path from root to terminal key.`,()=>{
+
+        expect(pathNotation).to.be.instanceOf(PathNotation);
+
+        expect(pathNotation.toString()).to.equal(expectedPath);
+
+      });
+
+      it(`Caches PathNotation instance after fist call.`,()=>{
+
+        const pathNotation2 = fooBarBazKey.pathNotation;
+
+        expect(pathNotation2).to.equal(pathNotation);
 
       });
 
