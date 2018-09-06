@@ -69,6 +69,24 @@ describe(`KeyNode`,()=>{
 
   describe('Accessors',()=>{
 
+    describe('rootKey',()=>{
+
+      it(`Returns the root KeyNode of from the KeyNode's path.`,()=>{
+
+        expect(fooBazKey).property('rootKey').to.equal(fooKey);
+        expect(fooBarQuxKey).property('rootKey').to.equal(fooKey);
+
+      });
+
+      it(`Returns self if KeyNode is root key.`,()=>{
+
+        expect(fooKey).property('IS_ROOT_KEY').to.be.true;
+        expect(fooKey).property('rootKey').to.equal(fooKey);
+
+      });
+
+    });
+
     describe(`isTerminalKey`,()=>{
 
       it(`Returns true when key does not have children and false when it has children.`,()=>{
