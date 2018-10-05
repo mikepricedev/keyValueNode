@@ -22,6 +22,6 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "key-node": "github:raptor9g/keyNode#v1.0.4"
+    "key-node": "github:raptor9g/keyNode#v1.0.5"
   }
 }
