@@ -1,6 +1,6 @@
 {
   "name": "key-value-node",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Tree Node for key/values in object path hierarchies.",
   "main": "build/index.js",
   "scripts": {
