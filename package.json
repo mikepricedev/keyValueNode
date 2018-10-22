@@ -1,6 +1,6 @@
 {
   "name": "key-value-node",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Tree Node for key/values in object path hierarchies.",
   "main": "build/index.js",
   "scripts": {
@@ -22,6 +22,6 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "key-node": "github:raptor9g/keyNode#v1.0.5"
+    "key-node": "github:raptor9g/keyNode#v1.0.6"
   }
 }
